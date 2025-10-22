@@ -307,7 +307,7 @@ def resultado_materia(notas: list[int]) -> int:
 # ejercicio 4
 # tengamos en cuenta que la tupla va a tener dos valores, uno que sera;
 # Ingresos, y otro retiro, y en el otro la guita.
-# es decir ("I", 2000) -> ("R", 1000) = 2000.
+# es decir ("I", 2000) -> ("R", 1000) = 1000.
 def saldoActual(movimientos: list[tuple[str, int]]) -> int:
     saldo: int = 0
     for h in range(len(movimientos)):
@@ -316,6 +316,19 @@ def saldoActual(movimientos: list[tuple[str, int]]) -> int:
         elif movimientos[h][0] == "R" and movimientos [h][1]>0:
             saldo -= movimientos[h][1]
     return saldo
+
+# ej 5 . MATRICES
+
+def pertenece_a_c_uno_v1(s: list[list[int]], e: int) -> list[bool]:
+    for sec in range(len(s)):
+        if not pertenece(s[sec], e):
+            return False
+    return True
+
+
+
+
+
 
     
 
