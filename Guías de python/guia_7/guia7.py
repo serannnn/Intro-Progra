@@ -325,6 +325,28 @@ def pertenece_a_c_uno_v1(s: list[list[int]], e: int) -> list[bool]:
             return False
     return True
 
+# ej 6 .
+def es_matriz(s: list[list[int]]) -> bool:
+    if len(s) > 0 and len(s[0]) > 0:
+        for i in range(len(s)):
+           if len(s[0]) != len(s[i]):
+                 return False
+    else:
+        return False
+    return True
+
+def filas_ordenadas(sec: list[list[int]]) -> list[bool]:  ## hacer testing de este.
+    if es_matriz(sec):
+        for filas in range(len(sec)):
+            if not ordenados(sec[filas]):
+                return False
+        return True
+    else:
+        return False
+
+
+
+
 
 
 
