@@ -344,6 +344,146 @@ def filas_ordenadas(sec: list[list[int]]) -> list[bool]:  ## hacer testing de es
     else:
         return False
 
+#6.3
+def columna(sec: list[list[int]], c: int) -> list[int]:
+    columna: list[int] = []
+    for i in range(len(sec)):
+        columna.append(sec[i][c])
+    return columna
+
+print(columna([[1,2,3],[4,5,6],[7,8,9]], 2))
+
+#6.4
+def columnas_ordenadas(sec: list[list[int]]) -> list[bool]:
+      lista_bool: list[bool] = [] # donde agregaremos cada bool
+      for c in range(len(sec[0])): # iremos iterando por columna (punto fuerte del ejercicio.)
+          if not ordenados(columna(sec, c)): # si no esta ordenada
+              lista_bool.append(False) # agregamos False
+          else:
+              lista_bool.append(True) # de lo contrario agregamos True.
+      return lista_bool # devuelvo la lista;
+
+# debo intercambiar filas por columnas ; 
+# [1,2,3]    ->  [1,4,7]
+# [4,5,6]    ->  [2,5,8]
+# [7,8,9]]   ->  [3,6,9]
+
+
+# 6.5 
+
+def transponer(sec: list[list[int]]) -> list[list[int]]:
+    mat_transp: list[list[int]] = []
+    for c in range(len(sec[0])): # accedo a cada columna de la matriz.
+        mat_transp.append(columna(sec, c)) # y agrego a la matriz creada; cada columna como fila.
+    return mat_transp # devuelvo la matriz transpuesta.
+
+# 6.6
+# tateti tradicional jijooo
+
+def es_tablero_tateti(tablero: list[list[str]]) -> bool: # innecesario.
+    for tabla in tablero:
+        if len(tabla) == 3 and len(tablero) == 3:
+            return True
+    return False
+
+def jugada_horizontal_O(tablero: list[list[str]]) -> bool:
+    for fila in tablero:
+        if fila == ["O","O","O"]:
+            return True
+    return False
+
+def jugada_horizontal_X(tablero: list[list[str]]) -> bool:
+    for fila in tablero:
+        if fila == ["X","X","X"]:
+            return True
+    return False
+
+def jugada_vertical_O(tablero: list[list[str]]) -> bool:
+    for c in range(len(tablero)): 
+        if columna(tablero, c) == ["O","O","O"]:
+            return True
+    return False
+
+def jugada_vertical_X(tablero: list[list[str]]) -> bool:
+    for c in range(len(tablero)): 
+        if columna(tablero, c) == ["X","X","X"]:
+            return True
+    return False
+
+# la idea para la primer diagonal es si tengo 
+#  if tablero[fila][columna] and fila == columna:
+# return True:
+def jugada_diagonal_X(tablero: list[list[str]]) -> bool:
+    for filas in range(len(tablero)):
+        for col in range(len(tablero)):
+            if filas == col and tablero[filas][col] != "X":
+                return False
+    return True
+
+def jugada_diagonal_dos_X(tablero: list[list[str]]) -> bool:
+    n: int = len(tablero)
+    for i in range(len(tablero)):
+        for j in range(len(tablero)):
+            if i == j and tablero[i][n - 1 - j] != "X":
+                return False
+    return True
+
+def jugada_diagonal_O(tablero: list[list[str]]) -> bool:
+    for filas in range(len(tablero)):
+        for col in range(len(tablero)):
+            if filas == col and tablero[filas][col] != "O":
+                return False
+    return True
+
+def jugada_diagonal_dos_O(tablero: list[list[str]]) -> bool:
+    n: int = len(tablero)
+    for i in range(len(tablero)):
+        for j in range(len(tablero)):
+            if i == j and tablero[i][n - 1 - j] != "O":
+                return False
+    return True
+
+
+def quien_gana_tateti(tablero: list[list[str]]) -> int:
+    ganador_HOR_O: bool = jugada_horizontal_O(tablero)
+    ganador_HOR_X: bool = jugada_horizontal_X(tablero)
+    ganador_VERT_O: bool = jugada_vertical_O(tablero)
+    ganador_VERT_X: bool = jugada_vertical_X(tablero)
+    ganador_DIA1_O: bool = jugada_diagonal_O(tablero)
+    ganador_DIA2_O: bool = jugada_diagonal_dos_O(tablero)
+    ganador_DIA1_X: bool = jugada_diagonal_X(tablero)
+    ganador_DIA2_X: bool = jugada_diagonal_dos_X(tablero)
+    O_GANADOR: int = 0
+    X_GANADOR: int = 1
+    EMPATE: int = 2
+
+    if (ganador_HOR_O or ganador_VERT_O or ganador_DIA1_O or ganador_DIA2_O) and not(ganador_HOR_X or ganador_VERT_X or ganador_DIA1_X or ganador_DIA2_X):
+        return O_GANADOR
+    elif not(ganador_HOR_O or ganador_VERT_O or ganador_DIA1_O or ganador_DIA2_O) and (ganador_HOR_X or ganador_VERT_X or ganador_DIA1_X or ganador_DIA2_X):
+        return X_GANADOR
+    else:
+        return EMPATE
+
+
+
+
+
+
+
+
+                
+
+            
+
+
+
+    
+        
+                
+
+
+    
+                
 
 
 
